@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { guides } from '@/data/guides';
 import { searchGuides } from '@/lib/search';
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export default function SearchBox() {
@@ -55,7 +55,7 @@ export default function SearchBox() {
             </div>
           ) : (
             results.map((result) => (
-              <Link key={result.id} href={result.url}>
+              <Link key={result.id} to={result.url}>
                 <a
                   className="px-4 py-3 hover:bg-slate-700 transition-colors border-b border-slate-700/50 last:border-b-0 block"
                   onClick={() => {

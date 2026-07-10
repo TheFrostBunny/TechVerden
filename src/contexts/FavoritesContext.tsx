@@ -1,4 +1,6 @@
-import { createContext, ReactNode, useContext } from 'react';
+import { createContext, useContext } from 'react';
+import type { ReactNode } from 'react';
+
 import { useFavorites } from '@/hooks/useFavorites';
 
 interface FavoritesContextType {
@@ -8,18 +10,19 @@ interface FavoritesContextType {
   isLoaded: boolean;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(
-  undefined
-);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const favorites = useFavorites();
+  const { favorites, toggleFavorite, isFavorite, isLoaded } = useFavorites();
 
-  return (
-    <FavoritesContext.Provider value={favorites}>
-      {children}
-    </FavoritesContext.Provider>
-  );
+  const value: FavoritesContextType = {
+    favorites,
+    toggleFavorite,
+    isFavorite,
+    isLoaded,
+  };
+
+  return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
 
 export function useFavoritesContext() {
@@ -29,4 +32,3 @@ export function useFavoritesContext() {
   }
   return context;
 }
-
