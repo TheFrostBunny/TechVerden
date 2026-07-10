@@ -50,7 +50,7 @@ jobs:
           fi
 
       - name: Build
-        run: pnpm run build:pages
+        run: pnpm run build
 
       - name: Verify build output
         run: |
